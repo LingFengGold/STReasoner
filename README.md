@@ -9,6 +9,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Dataset](https://img.shields.io/badge/🤗%20Dataset-ST--Bench-orange)](https://huggingface.co/datasets/Time-HD-Anonymous/ST-Bench)
 [![Model](https://img.shields.io/badge/🤗%20Model-STReasoner--8B-purple)](https://huggingface.co/Time-HD-Anonymous/STReasoner-8B)
+[![Paper](https://img.shields.io/badge/📄%20Paper-arXiv:2601.03248-red)](https://arxiv.org/pdf/2601.03248)
 
 <img src="./figures/streasoner.png" width="100">
 
