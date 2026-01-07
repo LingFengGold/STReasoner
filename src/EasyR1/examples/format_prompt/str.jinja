@@ -1,0 +1,7 @@
+{% if "Historical observation window" in content %}
+{{ content | trim }} You should first thinks about the reasoning process in the mind and then provides the answer. 
+Output Format: <think>Your step-by-step reasoning process</think><answer>[Your predicted sequence, use comma to separate the values, use [] to enclose the sequence]</answer>
+{% else %}
+{{ content | trim }} You should first thinks about the reasoning process in the mind and then provides the answer. 
+Output Format: <think>Your step-by-step reasoning process</think><answer>Your final answer(Note: Only output a single uppercase letter of the correct option)</answer>
+{% endif %}

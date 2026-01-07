@@ -1,0 +1,9 @@
+{
+  "task": "reasoning_forecasting",
+  "total_samples": 280,
+  "evaluated_samples": 280,
+  "missing_predictions": 0,
+  "coverage": 1.0,
+  "mae": 65.5934736377407,
+  "missing_indices": []
+}

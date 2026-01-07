@@ -1,0 +1,8 @@
+{
+  "task": "reasoning_etiological",
+  "total_samples": 207,
+  "evaluated_samples": 207,
+  "missing_predictions": 0,
+  "coverage": 1.0,
+  "accuracy": 0.9565217391304348
+}

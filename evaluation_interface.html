@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Quality Assessment</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; margin: 0; }
+        #controls { padding: 10px; background: #f0f0f0; border-bottom: 1px solid #ccc; text-align: center; }
+        #main-container { display: flex; flex: 1; overflow: hidden; }
+        #viewer { flex: 1; border: none; }
+        #sidebar { width: 400px; padding: 10px; border-left: 1px solid #ccc; overflow-y: auto; background: #fafafa; }
+        #scenario-text { white-space: pre-wrap; font-family: monospace; font-size: 12px; }
+        .button { padding: 8px 12px; margin: 0 5px; cursor: pointer; }
+        .high { background-color: #4CAF50; color: white; border: none; }
+        .low { background-color: #f44336; color: white; border: none; }
+        #stats { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="controls">
+    <span id="progress"></span>
+    <button class="button" onclick="navigate(-1)">Previous</button>
+    <button class="button" onclick="navigate(1)">Next</button>
+    <button class="button" onclick="navigateToNextUnassessed()">Next Unassessed</button>
+    <button class="button high" onclick="assess('High')">High Quality</button>
+    <button class="button low" onclick="assess('Low')">Low Quality</button>
+    <button class="button" onclick="exportToCSV()">Export to CSV</button>
+    <div id="stats"></div>
+</div>
+
+<div id="main-container">
+    <iframe id="viewer"></iframe>
+    <div id="sidebar">
+        <h3>Scenario Description</h3>
+        <p id="scenario-text">Loading...</p>
+    </div>
+</div>
+
+<script>
+    // File format: task_{task_id}_{domain}_{timestamp}.json and task_{task_id}_{domain}_interactive_{timestamp}.html
+    
+    let samples = [];
+    let currentIndex = 0;
+    let assessments = {};
+
+    async function scanOutputDirectory() {
+        // Load file list from list_files.json
+        try {
+            const response = await fetch('data_generation/list_files.json');
+            const fileList = await response.json();
+            return fileList;
+        } catch (e) {
+            console.log('Unable to load file list. Please run generate_file_list.py first.');
+            return [];
+        }
+    }
+
+    function setupSamples(fileList = []) {
+        if (fileList.length === 0) {
+            console.log('File list is empty');
+        }
+        
+        const fileMap = {};
+        
+        // Parse file format: task_{task_id}_{domain}_{timestamp}.json and task_{task_id}_{domain}_interactive_{timestamp}.html
+        fileList.forEach(file => {
+            // Match JSON files: task_0960_Transportation_20251101_075543.json
+            const jsonMatch = file.match(/^(task_\d+)_(.+?)_(\d{8}_\d{6})\.json$/);
+            
+            // Match HTML files: task_0960_Transportation_interactive_20251101_075543.html
+            const htmlMatch = file.match(/^(task_\d+)_(.+?)_interactive_(\d{8}_\d{6})\.html$/);
+            
+            if (jsonMatch) {
+                const taskId = jsonMatch[1];
+                const domain = jsonMatch[2];
+                const timestamp = jsonMatch[3];
+                const key = `${taskId}_${domain}_${timestamp}`;
+                
+                if (!fileMap[key]) {
+                    fileMap[key] = { taskId, domain, timestamp };
+                }
+                fileMap[key].json = 'data_generation/batch_output/' + file;
+            } else if (htmlMatch) {
+                const taskId = htmlMatch[1];
+                const domain = htmlMatch[2];
+                const timestamp = htmlMatch[3];
+                const key = `${taskId}_${domain}_${timestamp}`;
+                
+                if (!fileMap[key]) {
+                    fileMap[key] = { taskId, domain, timestamp };
+                }
+                fileMap[key].html = 'data_generation/batch_output/' + file;
+            }
+        });
+
+        samples = Object.keys(fileMap)
+            .filter(key => fileMap[key].json && fileMap[key].html)
+            .map(key => ({
+                id: key,
+                taskId: fileMap[key].taskId,
+                domain: fileMap[key].domain,
+                timestamp: fileMap[key].timestamp,
+                jsonFile: fileMap[key].json,
+                htmlFile: fileMap[key].html
+            }))
+            .sort((a, b) => {
+                // Sort by taskId
+                const taskNumA = parseInt(a.taskId.replace('task_', ''));
+                const taskNumB = parseInt(b.taskId.replace('task_', ''));
+                if (taskNumA !== taskNumB) return taskNumA - taskNumB;
+                return a.timestamp.localeCompare(b.timestamp);
+            });
+
+        assessments = JSON.parse(localStorage.getItem('assessments_v3')) || {};
+        samples.forEach(sample => {
+            if (!assessments[sample.id]) {
+                assessments[sample.id] = 'Unassessed';
+            }
+        });
+
+        if (samples.length > 0) {
+            loadSample(0);
+        } else {
+            document.getElementById('scenario-text').textContent = 
+                '❌ No data files found.\n\n' +
+                'Please ensure:\n' +
+                '1. Run generate_file_list.py to generate the file list\n' +
+                '2. File format is correct:\n' +
+                '   - task_{id}_{domain}_{timestamp}.json\n' +
+                '   - task_{id}_{domain}_interactive_{timestamp}.html\n\n' +
+                'Example:\n' +
+                '  - task_0960_Transportation_20251101_075543.json\n' +
+                '  - task_0960_Transportation_interactive_20251101_075543.html';
+        }
+    }
+
+    // Initialize function
+    async function initialize() {
+        const fileList = await scanOutputDirectory();
+        
+        if (fileList.length === 0) {
+            console.warn('No files detected automatically. Please run generate_file_list.py first.');
+        }
+        
+        setupSamples(fileList);
+    }
+
+    async function loadSample(index) {
+        if (index < 0 || index >= samples.length) return;
+        currentIndex = index;
+
+        const sample = samples[currentIndex];
+        document.getElementById('viewer').src = sample.htmlFile;
+        
+        document.getElementById('scenario-text').textContent = 'Loading...';
+        try {
+            const response = await fetch(sample.jsonFile);
+            const data = await response.json();
+            document.getElementById('scenario-text').textContent = data.agent1_scenario;
+        } catch (error) {
+            document.getElementById('scenario-text').textContent = 'Error loading scenario.';
+            console.error('Error fetching scenario:', error);
+        }
+
+        updateUI();
+    }
+
+    function updateUI() {
+        const sample = samples[currentIndex];
+        const displayName = `${sample.taskId} - ${sample.domain}`;
+        document.getElementById('progress').textContent = 
+            `${displayName} - ${currentIndex + 1} / ${samples.length}`;
+        updateStats();
+    }
+
+    function updateStats() {
+        const counts = { High: 0, Low: 0, Unassessed: 0 };
+        Object.values(assessments).forEach(status => {
+            counts[status]++;
+        });
+        document.getElementById('stats').textContent = 
+            `High: ${counts.High} | Low: ${counts.Low} | Unassessed: ${counts.Unassessed}`;
+    }
+
+    function navigate(direction) {
+        loadSample(currentIndex + direction);
+    }
+
+    function navigateToNextUnassessed() {
+        // Find the first unassessed sample starting from the beginning of the list.
+        const nextIndex = samples.findIndex(sample => assessments[sample.id] === 'Unassessed');
+        
+        if (nextIndex !== -1) {
+            loadSample(nextIndex);
+        } else {
+            alert("All samples have been assessed!");
+        }
+    }
+
+    function assess(quality) {
+        assessments[samples[currentIndex].id] = quality;
+        localStorage.setItem('assessments_v3', JSON.stringify(assessments));
+        updateStats();
+        navigateToNextUnassessed();
+    }
+
+    function exportToCSV() {
+        let csvContent = "data:text/csv;charset=utf-8,task_id,domain,timestamp,quality_label\n";
+        samples.forEach(sample => {
+            csvContent += `${sample.taskId},${sample.domain},${sample.timestamp},${assessments[sample.id]}\n`;
+        });
+        
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "quality_labels.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // Initialize on page load
+    window.onload = async function() {
+        await initialize();
+    };
+
+</script>
+
+</body>
+</html>

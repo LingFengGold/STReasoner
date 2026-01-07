@@ -1,0 +1,330 @@
+{
+    "alignment": {
+        "file_name": "ST-Bench/ST-Align/alignment_train.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "alignment_test": {
+        "file_name": "ST-Bench/ST-Align/alignment_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "entity_cot": {
+        "file_name": "ST-Bench/ST-CoT/entity_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "etiological_cot": {
+        "file_name": "ST-Bench/ST-CoT/etiological_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "correlation_cot": {
+        "file_name": "ST-Bench/ST-CoT/correlation_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "forecasting_cot": {
+        "file_name": "ST-Bench/ST-CoT/forecasting_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "entity_sft": {
+        "file_name": "ST-Bench/ST-SFT/entity_finetune.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "etiological_sft": {
+        "file_name": "ST-Bench/ST-SFT/etiological_finetune.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "correlation_sft": {
+        "file_name": "ST-Bench/ST-SFT/correlation_finetune.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "forecasting_sft": {
+        "file_name": "ST-Bench/ST-SFT/forecasting_finetune.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "entity_rl": {
+        "file_name": "ST-Bench/ST-RL/entity_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "etiological_rl": {
+        "file_name": "ST-Bench/ST-RL/etiological_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "correlation_rl": {
+        "file_name": "ST-Bench/ST-RL/correlation_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "forecasting_rl": {
+        "file_name": "ST-Bench/ST-RL/forecasting_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "entity_test": {
+        "file_name": "ST-Bench/ST-Test/entity_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "etiological_test": {
+        "file_name": "ST-Bench/ST-Test/etiological_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "correlation_test": {
+        "file_name": "ST-Bench/ST-Test/correlation_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "forecasting_test": {
+        "file_name": "ST-Bench/ST-Test/forecasting_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "causal": {
+        "file_name": "ST-Bench/ST-Causal/causal.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "timeseries": "timeseries"
+        }
+    },
+    "entity_cot_text": {
+        "file_name": "ST-Bench/ST-CoT-Text/entity_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "etiological_cot_text": {
+        "file_name": "ST-Bench/ST-CoT-Text/etiological_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "correlation_cot_text": {
+        "file_name": "ST-Bench/ST-CoT-Text/correlation_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "forecasting_cot_text": {
+        "file_name": "ST-Bench/ST-CoT-Text/forecasting_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "entity_sft_text": {
+        "file_name": "ST-Bench/ST-SFT-Text/entity_finetune.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "etiological_sft_text": {
+        "file_name": "ST-Bench/ST-SFT-Text/etiological_finetune.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "correlation_sft_text": {
+        "file_name": "ST-Bench/ST-SFT-Text/correlation_finetune.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "forecasting_sft_text": {
+        "file_name": "ST-Bench/ST-SFT-Text/forecasting_finetune.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "entity_rl_text": {
+        "file_name": "ST-Bench/ST-RL-Text/entity_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "etiological_rl_text": {
+        "file_name": "ST-Bench/ST-RL-Text/etiological_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "correlation_rl_text": {
+        "file_name": "ST-Bench/ST-RL-Text/correlation_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "forecasting_rl_text": {
+        "file_name": "ST-Bench/ST-RL-Text/forecasting_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "entity_test_text": {
+        "file_name": "ST-Bench/ST-Test-Text/entity_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "etiological_test_text": {
+        "file_name": "ST-Bench/ST-Test-Text/etiological_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "correlation_test_text": {
+        "file_name": "ST-Bench/ST-Test-Text/correlation_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "forecasting_test_text": {
+        "file_name": "ST-Bench/ST-Test-Text/forecasting_test.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output"
+        }
+    },
+    "entity_cot_image": {
+        "file_name": "ST-Bench/ST-CoT-Image/entity_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "images": "images"
+        }
+    },
+    "etiological_cot_image": {
+        "file_name": "ST-Bench/ST-CoT-Image/etiological_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "images": "images"
+        }
+    },
+    "correlation_cot_image": {
+        "file_name": "ST-Bench/ST-CoT-Image/correlation_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "images": "images"
+        }
+    },
+    "forecasting_cot_image": {
+        "file_name": "ST-Bench/ST-CoT-Image/forecasting_cot.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "images": "images"
+        }
+    },
+    "entity_rl_image": {
+        "file_name": "ST-Bench/ST-RL-Image/entity_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "images": "images"
+        }
+    },
+    "etiological_rl_image": {
+        "file_name": "ST-Bench/ST-RL-Image/etiological_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "images": "images"
+        }
+    },
+    "correlation_rl_image": {
+        "file_name": "ST-Bench/ST-RL-Image/correlation_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "images": "images"
+        }
+    },
+    "forecasting_rl_image": {
+        "file_name": "ST-Bench/ST-RL-Image/forecasting_rl.jsonl",
+        "columns": {
+            "prompt": "input",
+            "response": "output",
+            "images": "images"
+        }
+    }
+}

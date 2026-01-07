@@ -1,0 +1,20 @@
+{
+    "alignment": {
+        "prompt": "Output Format: <think>Your step-by-step reasoning process</think><answer>Your answer here</answer>"
+    },
+    "reasoning_forecasting": {
+        "prompt": "Output Format: <think>Your step-by-step reasoning process</think><answer>[Your predicted sequence, use comma to separate the values, use [] to enclose the sequence]</answer>"
+    },
+    "reasoning_entity": {
+        "prompt": "Output Format: <think>Your step-by-step reasoning process</think><answer>Your final answer(Note: Only output a single uppercase letter of the correct option)</answer>"
+    },
+    "reasoning_etiological": {
+        "prompt": "Output Format: <think>Your step-by-step reasoning process</think><answer>Your final answer(Note: Only output a single uppercase letter of the correct option)</answer>"
+    },
+    "reasoning_correlation": {
+        "prompt": "Output Format: <think>Your step-by-step reasoning process</think><answer>Your final answer(Note: Only output a single uppercase letter of the correct option)</answer>"
+    },
+    "reasoning_causal": {
+        "prompt": "Output Format: <think>Your step-by-step reasoning process</think><answer>Your final answer(Note: Only output a single uppercase letter of the correct option)</answer>"
+    }
+}

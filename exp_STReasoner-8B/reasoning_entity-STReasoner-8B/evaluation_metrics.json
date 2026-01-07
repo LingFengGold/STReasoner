@@ -1,0 +1,8 @@
+{
+  "task": "reasoning_entity",
+  "total_samples": 1194,
+  "evaluated_samples": 1194,
+  "missing_predictions": 0,
+  "coverage": 1.0,
+  "accuracy": 0.7571189279731994
+}

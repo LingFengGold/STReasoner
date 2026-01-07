@@ -1,0 +1,8 @@
+{
+  "task": "reasoning_correlation",
+  "total_samples": 1592,
+  "evaluated_samples": 1592,
+  "missing_predictions": 0,
+  "coverage": 1.0,
+  "accuracy": 0.8712311557788944
+}
