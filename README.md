@@ -29,7 +29,7 @@
 ---
 
 ## 📰 News
-- **[2026/04/06]** STReasoner has been selected for Oral!!🎉 🎉 🎉
+- **[2026/05/20]** STReasoner has been selected for Oral!!🎉 🎉 🎉
 - **[2026/05/01]** 🎉 Open-sourced the **Network SDEs-based Multi-Agent Spatio-Temporal Data Synthesis Pipeline** in the paper, available in [`data_generation/`](data_generation/).
 - **[2026/04/06]** STReasoner has been accepted to ACL 2026 Main!!🎉 🎉 🎉
 - **[2026/02/19]** Now supports Qwen3-4B, Qwen3-8B, and Qwen3-14B, and adds the MAPE metric during evaluation.
